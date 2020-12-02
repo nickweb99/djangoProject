@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/ToDoStyles.css'%}">
+
+    <title>To Do</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row" style = "justify-content:center">
+            <div class="col-8">
+                <p class = "display-4 text-center">To-Do-List</p>
+                <form action="{% url 'add' %}" method="post" id ="AddTask">
+                {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Add Tasks" name ="task" aria-label="Add Tasks" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class = "btn btn-primary" type = "submit" id ="button-addon2">ADD</button>
+                        </div>
+                    </div>
+                </form>
+                {% for task in tasks %}
+                    {% if task.complete %}
+                        <div class = "row py-3 bg-secondary" id="divSty">
+                            <div class = "col-12 col-lg-6">
+                                <h4><del>{{ task }}</del></h4>
+                                <p><del>Created at: {{ task.time }}</del></p>
+                            </div>
+                            <div class = "col-12 col-lg-6" id="rightCon">
+                                <a href = "{%url 'Update' task.id %}"><button type = "button" class = "btn btn-primary">Update</button></a>
+                                <a href = "{%url 'Delete' task.id %}"><button type = "button" class = "btn btn-danger">Delete</button></a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class = "row py-3" id="divSty">
+                            <div class = "col-12 col-lg-6">
+                                <h4>{{ task }}</h4>
+                                <p>Created at: {{ task.time }}</p>
+                            </div>
+                            <div class = "col-12 col-lg-6" id="rightCon">
+                                <a href = "{%url 'Complete' task.id %}"><button type = "button" class = "btn btn-success">Complete</button></a>
+                                <a href = "{%url 'Update' task.id %}"><button type = "button" class = "btn btn-primary">Update</button></a>
+                                <a href = "{%url 'Delete' task.id %}"><button type = "button" class = "btn btn-danger">Delete</button></a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

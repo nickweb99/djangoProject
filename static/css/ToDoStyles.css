@@ -1,0 +1,49 @@
+body{
+    background-color: #fafafa;
+}
+
+#rightCon {
+	text-align:right;
+}
+
+#divSty {
+	border: 1px solid silver;
+	border-radius: .25rem;
+	background-color: white;
+	margin: 8px;
+}
+
+#create {
+	font-size: .7rem;
+	color: grey;
+}
+
+#task {
+	font-weight: bold;
+}
+
+#Complete {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#checkbox {
+	transform : scale(2.5);
+	margin-left: 15px;
+}
+
+#tsk {
+	color: #fe6993;
+	background-color: rgba(254,105,147,.1);
+	padding: 2px;
+	border: solid;
+	border-radius: 3px;
+	line-height: 2px;
+}
+
+@media only screen
+ and (max-width: 768px) {
+	#rightCon {
+		float: left;
+	}
+ }
